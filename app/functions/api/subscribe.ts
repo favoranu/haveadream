@@ -1,12 +1,8 @@
+import { corsHeaders } from '../_shared/security';
+
 interface Env {
   TURNSTILE_SECRET_KEY?: string;
 }
-
-const CORS = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'POST, OPTIONS',
-  'Access-Control-Allow-Headers': 'Content-Type',
-};
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -27,59 +23,55 @@ async function verifyTurnstile(secret: string, token: string, ip: string) {
   return Boolean(data.success);
 }
 
-export const onRequestOptions: PagesFunction<Env> = async () => {
-  return new Response(null, { status: 204, headers: CORS });
+function jsonResponse(request: Request, status: number, payload: unknown) {
+  return new Response(JSON.stringify(payload), {
+    status,
+    headers: {
+      ...corsHeaders(request),
+      'Content-Type': 'application/json',
+    },
+  });
+}
+
+export const onRequestOptions: PagesFunction<Env> = async (context) => {
+  return new Response(null, { status: 204, headers: corsHeaders(context.request) });
 };
 
 export const onRequestPost: PagesFunction<Env> = async (context) => {
+  if (!corsHeaders(context.request)['Access-Control-Allow-Origin']) {
+    return jsonResponse(context.request, 403, { error: 'Origin not allowed.' });
+  }
+
   let payload: { email?: string; turnstileToken?: string };
 
   try {
     payload = await context.request.json();
   } catch {
-    return new Response(JSON.stringify({ error: 'Invalid request body.' }), {
-      status: 400,
-      headers: { ...CORS, 'Content-Type': 'application/json' },
-    });
+    return jsonResponse(context.request, 400, { error: 'Invalid request body.' });
   }
 
   const email = payload.email?.trim().toLowerCase();
   const turnstileToken = payload.turnstileToken?.trim();
 
   if (!email || !EMAIL_RE.test(email)) {
-    return new Response(JSON.stringify({ error: 'Please enter a valid email address.' }), {
-      status: 400,
-      headers: { ...CORS, 'Content-Type': 'application/json' },
-    });
+    return jsonResponse(context.request, 400, { error: 'Please enter a valid email address.' });
   }
 
   if (!turnstileToken) {
-    return new Response(JSON.stringify({ error: 'Please complete the verification check.' }), {
-      status: 400,
-      headers: { ...CORS, 'Content-Type': 'application/json' },
-    });
+    return jsonResponse(context.request, 400, { error: 'Please complete the verification check.' });
   }
 
   const secret = context.env.TURNSTILE_SECRET_KEY;
   if (!secret) {
-    return new Response(JSON.stringify({ error: 'Newsletter signup is not configured yet.' }), {
-      status: 503,
-      headers: { ...CORS, 'Content-Type': 'application/json' },
-    });
+    return jsonResponse(context.request, 503, { error: 'Newsletter signup is not configured yet.' });
   }
 
   const ip = context.request.headers.get('CF-Connecting-IP') ?? '';
   const verified = await verifyTurnstile(secret, turnstileToken, ip);
 
   if (!verified) {
-    return new Response(JSON.stringify({ error: 'Verification failed. Please try again.' }), {
-      status: 403,
-      headers: { ...CORS, 'Content-Type': 'application/json' },
-    });
+    return jsonResponse(context.request, 403, { error: 'Verification failed. Please try again.' });
   }
 
-  return new Response(JSON.stringify({ ok: true, email }), {
-    status: 200,
-    headers: { ...CORS, 'Content-Type': 'application/json' },
-  });
+  return jsonResponse(context.request, 200, { ok: true, email });
 };
