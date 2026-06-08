@@ -16,6 +16,7 @@
   <meta name="twitter:description" content="The inspiration to #prosperity #meme. Respect to MLK. To #infinity.">
   <meta name="twitter:image" content="https://www.haveadream.xyz/images/had.unstoppable_1024x1024.PNG">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%2302183D'/%3E%3Ccircle cx='50' cy='42' r='18' fill='%23ffffff'/%3E%3Cpath d='M20 65 Q35 55 50 60 Q65 55 80 65' stroke='%23ffffff' stroke-width='3' fill='none'/%3E%3Cpath d='M15 72 Q35 62 50 67 Q65 62 85 72' stroke='%23ffffff' stroke-width='3' fill='none'/%3E%3C/svg%3E">
+  <meta name="turnstile-site-key" content="0x4AAAAAADgqKKCSCb938y3R">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -357,6 +358,7 @@
       <form id="signup-form" class="signup-form" novalidate>
         <label for="email" class="sr-only">Email address</label>
         <input type="email" id="email" name="email" placeholder="your@email.com" autocomplete="email" required>
+        <div id="turnstile-container" class="turnstile-wrap"></div>
         <button type="submit" id="submit-btn">
           <span class="btn-text">Notify Me ✨</span>
           <span class="btn-loading" hidden>Joining…</span>
@@ -411,9 +413,10 @@
     <p class="muted-xs" style="margin-top: 0.5rem;">$HAD is a meme token. Not financial advice. Dream responsibly.</p>
   </footer>
 
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <script src="js/tokenomics-chart.js"></script>
-  <script src="app.js?v=3"></script>
+  <script src="app.js?v=4"></script>
   <script>
     const heroVideo = document.querySelector('.hero-video');
     if (heroVideo && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {

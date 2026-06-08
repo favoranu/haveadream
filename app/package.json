@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "deploy": "wrangler pages deploy dist --project-name=had-app",
+    "deploy": "wrangler pages deploy dist --project-name=haveadream --commit-dirty=true",
     "preview": "vite preview",
     "pages:dev": "wrangler pages dev dist --compatibility-date=2024-09-23"
   },

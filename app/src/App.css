@@ -77,6 +77,16 @@
   border-radius: 16px;
   padding: 1.25rem;
 }
+
+.turnstile-wrap {
+  margin: 1rem 0 0.75rem;
+  min-height: 65px;
+}
+
+.wallet-gated {
+  opacity: 0.55;
+  pointer-events: none;
+}
 .card-wide { grid-column: 1 / -1; }
 .card h2 {
   margin: 0 0 0.75rem;

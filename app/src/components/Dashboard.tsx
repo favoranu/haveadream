@@ -12,7 +12,7 @@ export function Dashboard() {
         <p className="eyebrow">Solana · SPL Token-2022</p>
         <h1>Connect. Verify. Build the dream.</h1>
         <p className="lead">
-          Official $HAD app on Cloudflare — wallet connect, on-chain balance checks,
+          Official $HAD app — wallet connect, on-chain balance checks,
           and the foundation for governance and haveadream.xyz utilities.
         </p>
       </section>

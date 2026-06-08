@@ -1,0 +1,1 @@
+Pin Wrangler v3 for Node 20 compatibility on Cloudflare deploy

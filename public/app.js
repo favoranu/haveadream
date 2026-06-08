@@ -4,8 +4,40 @@ const submitBtn = document.getElementById("submit-btn");
 const btnText = submitBtn.querySelector(".btn-text");
 const btnLoading = submitBtn.querySelector(".btn-loading");
 const messageEl = document.getElementById("form-message");
+const turnstileContainer = document.getElementById("turnstile-container");
+const turnstileSiteKey = document
+  .querySelector('meta[name="turnstile-site-key"]')
+  ?.content?.trim();
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+let turnstileWidgetId = null;
+
+function resetTurnstile() {
+  if (turnstileWidgetId && window.turnstile) {
+    window.turnstile.reset(turnstileWidgetId);
+  }
+}
+
+function mountTurnstile() {
+  if (!turnstileSiteKey || !turnstileContainer || !window.turnstile || turnstileWidgetId) return;
+
+  turnstileWidgetId = window.turnstile.render(turnstileContainer, {
+    sitekey: turnstileSiteKey,
+    theme: "dark",
+  });
+}
+
+if (turnstileSiteKey) {
+  if (window.turnstile) {
+    mountTurnstile();
+  } else {
+    window.addEventListener("load", mountTurnstile);
+  }
+}
+
+function getTurnstileToken() {
+  return form.querySelector('input[name="cf-turnstile-response"]')?.value?.trim() || "";
+}
 
 function setLoading(loading) {
   submitBtn.disabled = loading;
@@ -67,13 +99,22 @@ form.addEventListener("submit", async (e) => {
   }
 
   emailInput.classList.remove("invalid");
+
+  if (turnstileSiteKey && !getTurnstileToken()) {
+    showMessage("Please complete the verification check.", "error");
+    return;
+  }
+
   setLoading(true);
 
   try {
     const res = await fetch("/api/subscribe", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email }),
+      body: JSON.stringify({
+        email,
+        turnstileToken: getTurnstileToken(),
+      }),
     });
 
     const data = await parseJsonSafe(res);
@@ -89,6 +130,7 @@ form.addEventListener("submit", async (e) => {
 
     showMessage("Welcome to the dream! You're on the list.", "success");
     form.reset();
+    resetTurnstile();
   } catch (err) {
     if (err.message === "Failed to fetch" || err.name === "TypeError") {
       saveLocally(email);
