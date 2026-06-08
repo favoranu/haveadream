@@ -1,0 +1,142 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word">
+<head>
+<meta charset="UTF-8">
+<meta name="ProgId" content="Word.Document">
+<meta name="Generator" content="Microsoft Word">
+<title>$HAD Whitepaper v1.1</title>
+<style>
+  @page { margin: 0.85in; }
+  body { font-family: Georgia, 'Times New Roman', serif; color: #111; line-height: 1.65; font-size: 10.5pt; }
+  h1 { font-size: 24pt; margin-bottom: 0.15em; color: #02183D; }
+  h2 { font-size: 14pt; margin-top: 1.5em; color: #02183D; border-bottom: 1px solid #ccc; padding-bottom: 0.15em; page-break-after: avoid; }
+  h3 { font-size: 11.5pt; margin-top: 1em; color: #333; page-break-after: avoid; }
+  .meta { color: #555; font-size: 10pt; margin-bottom: 1.5em; }
+  .lead { font-size: 11pt; font-style: italic; color: #333; margin-bottom: 1.5em; }
+  table { width: 100%; border-collapse: collapse; margin: 1em 0; font-size: 9.5pt; }
+  th, td { border: 1px solid #ccc; padding: 6px 10px; text-align: left; }
+  th { background: #eef0fa; }
+  ul { margin: 0.4em 0 0.8em; }
+  .chart { text-align: center; margin: 1.2em 0; }
+  .chart img { max-width: 340px; }
+  .highlight { background: #f8f6e8; padding: 0.8em 1em; border-left: 3px solid #FFD700; margin: 1em 0; font-size: 10pt; }
+  .timeline-item { margin-bottom: 0.9em; padding-left: 0.5em; border-left: 2px solid #4C47F7; }
+  .timeline-item strong { color: #02183D; }
+  .disclaimer { font-size: 9pt; color: #666; margin-top: 2em; border-top: 1px solid #ddd; padding-top: 1em; }
+  .page-break { page-break-before: always; }
+</style>
+</head>
+<body>
+  <h1>$HAD Whitepaper</h1>
+  <p class="meta"><strong>Have A Dream</strong> &middot; Version 1.1 &middot; January 2026 &middot; Launch: January 15, 2027<br>haveadream.xyz &middot; HAD.unstoppable</p>
+  <p class="lead">The inspiration to #prosperity #meme &mdash; Respect to MLK &mdash; to #infinity</p>
+
+  <h2>1. Executive Summary</h2>
+  <p><strong>$HAD (Have A Dream)</strong> is a community-driven utility token inspired by Dr. Martin Luther King Jr. and the universal desire for prosperity, freedom, and collective creation. Unlike yield-focused projects, $HAD serves as the <strong>key to haveadream.xyz features</strong> &mdash; governance voting, dream-sharing tools, meme generators, and future inspiration integrations.</p>
+  <div class="highlight"><strong>No yields or financial returns are promised.</strong> Value emerges from collective creation, platform use, and community belief &mdash; not from guaranteed returns.</div>
+  <p>With a fixed supply of <strong>10,000,000,000 $HAD</strong>, zero transaction tax, and transparent allocations minted in January 2024, the project is built for long-term community ownership through January 15, 2027 official launch and beyond.</p>
+
+  <h2>2. Vision &amp; Mission</h2>
+  <h3>Vision</h3>
+  <p>A world where opportunity and creative tools are accessible to every dreamer &mdash; where prosperity is a direction, not a gatekept destination, extending to #infinity.</p>
+  <h3>Mission</h3>
+  <p>Build haveadream.xyz as a platform where $HAD holders govern, create, share dreams, and shape the movement &mdash; honoring Dr. King's legacy of unity while embracing meme culture and decentralized community power.</p>
+
+  <h2>3. The Opportunity</h2>
+  <p>Meme tokens mobilize millions overnight but often lack utility, narrative depth, or transparency. Simultaneously, global audiences connect deeply with "having a dream." $HAD unites these forces: culture with purpose, memes with tools, community with governance.</p>
+
+  <h2>4. The $HAD Solution</h2>
+  <ul>
+    <li><strong>Dream Big</strong> &mdash; Boundless community imagination</li>
+    <li><strong>Respect &amp; Legacy</strong> &mdash; MLK tribute woven into identity and allocations</li>
+    <li><strong>To Infinity</strong> &mdash; No artificial ceilings</li>
+    <li><strong>Prosperity for All</strong> &mdash; Open access to platform utility</li>
+    <li><strong>Unstoppable</strong> &mdash; HAD.unstoppable domain identity</li>
+    <li><strong>Community First</strong> &mdash; Holders vote; dreamers build</li>
+  </ul>
+
+  <h2>5. Utility Focus</h2>
+  <p>$HAD is designed as a <strong>platform access and governance token</strong>, not an investment contract promising profit.</p>
+  <h3>Core Utilities on haveadream.xyz</h3>
+  <ul>
+    <li><strong>Governance Voting</strong> &mdash; Vote on treasury deployment, partnerships, feature priorities, and ecosystem incentives</li>
+    <li><strong>Dream-Sharing Tools</strong> &mdash; Post, archive, and celebrate community dreams and aspirations</li>
+    <li><strong>Meme Generators</strong> &mdash; Create $HAD-branded content to spread the movement</li>
+    <li><strong>Inspiration Integrations</strong> &mdash; Future apps, NFT dream visuals, and third-party inspiration tools (holder-approved)</li>
+  </ul>
+  <p>Utility expands through community votes. Holding $HAD may be required to access certain features, submit proposals, or participate in governance &mdash; specifics will be published prior to January 15, 2027 launch.</p>
+
+  <h2>6. Token Overview</h2>
+  <table>
+    <tr><th>Property</th><th>Detail</th></tr>
+    <tr><td>Ticker</td><td>$HAD</td></tr>
+    <tr><td>Name</td><td>Have A Dream</td></tr>
+    <tr><td>Total Supply</td><td>10,000,000,000 (fixed)</td></tr>
+    <tr><td>Mint Date</td><td>January 2024</td></tr>
+    <tr><td>Launch Date</td><td>January 15, 2027</td></tr>
+    <tr><td>Chain</td><td>Solana (SPL Token-2022)</td></tr>
+    <tr><td>Contract (official)</td><td>HAdrC2f52GTnDN15baCBC372QRxsftNL36HUSxveLEKe</td></tr>
+    <tr><td>Legacy contract</td><td>2MNiw437NfdbnHKz7adGmQwF1TKsVBRrERLF2bQEvGFy (deprecated)</td></tr>
+    <tr><td>Solscan</td><td>solscan.io/token/HAdrC2f52GTnDN15baCBC372QRxsftNL36HUSxveLEKe</td></tr>
+    <tr><td>Tax</td><td>0%</td></tr>
+    <tr><td>Website</td><td>haveadream.xyz</td></tr>
+    <tr><td>Domain</td><td>HAD.unstoppable</td></tr>
+    <tr><td>Telegram Announcements</td><td>t.me/haveadreamxyz</td></tr>
+    <tr><td>Telegram Community</td><td>t.me/hadunstoppable</td></tr>
+    <tr><td>Twitter</td><td>@hadunstoppable</td></tr>
+  </table>
+
+  <h2>7. Tokenomics</h2>
+  <p>Total supply: <strong>10,000,000,000 $HAD</strong>. No additional minting. Tokenomics done right is like a good dream &mdash; allocate wisely, then build a reality you actually own.</p>
+  <div class="chart"><img src="images/had-tokenomics.png" width="400" alt="$HAD Token Allocation chart"></div>
+  <table>
+    <tr><th>Allocation</th><th>%</th><th>Amount (HAD)</th></tr>
+    <tr><td>Team &amp; Founder</td><td>19.00%</td><td>1,900,000,000</td></tr>
+    <tr><td>Treasury</td><td>39.51%</td><td>3,951,000,000</td></tr>
+    <tr><td>Airdrop</td><td>22.20%</td><td>2,220,000,000</td></tr>
+    <tr><td>Ecosystem Incentives*</td><td>19.29%</td><td>1,929,000,000</td></tr>
+  </table>
+  <ul>
+    <li><strong>Team &amp; Founder (19%)</strong> &mdash; Vested/long-term locked to align incentives with long-term building</li>
+    <li><strong>Treasury (39.51%)</strong> &mdash; Reserved for ecosystem development, partnerships, and utility tools on haveadream.xyz</li>
+    <li><strong>Airdrop (22.2%)</strong> &mdash; Distributed to early community contributors, dream sharers, and meme creators</li>
+    <li><strong>Ecosystem Incentives (19.29%)*</strong> &mdash; MLK Birthday nod: positivity rewards, inspiration campaigns, and utility access programs</li>
+  </ul>
+  <p><em>*Includes MLK Birthday tribute allocation for community rewards and charitable initiatives.</em></p>
+  <h3>Treasury Use</h3>
+  <p>Liquidity, listings, development, marketing, community grants, and platform build-out &mdash; subject to governance votes where applicable.</p>
+
+  <div class="page-break"></div>
+
+  <h2>8. Timeline &amp; Roadmap</h2>
+  <div class="timeline-item"><strong>January 2024 &mdash; Inception &amp; Minting:</strong> 10B $HAD created on-chain. Early community forms.</div>
+  <div class="timeline-item"><strong>2024 &ndash; Mid 2025 &mdash; Foundation Phase:</strong> Meme culture grows; positivity airdrops; treasury funds ideation.</div>
+  <div class="timeline-item"><strong>Late 2025 &mdash; Domain &amp; Build:</strong> haveadream.xyz secured; utility prototypes (dream sharing, governance).</div>
+  <div class="timeline-item"><strong>January 2026 &mdash; Pre-Launch &amp; Expansion:</strong> Website live; whitepaper v1.1; ecosystem incentives; MLK allocation active; governance begins.</div>
+  <div class="timeline-item"><strong>January 15, 2027 &mdash; Official Launch:</strong> Full haveadream.xyz utility rollout; $HAD as platform key.</div>
+  <div class="timeline-item"><strong>2027+ &mdash; Manifestation Phase:</strong> Inspiration apps, NFT dream visuals, partnerships &mdash; holder-governed.</div>
+
+  <h2>9. Governance</h2>
+  <p>$HAD holders propose and vote on treasury allocations, feature development priorities, partnership approvals, and ecosystem incentive programs. Governance parameters (quorum, voting periods, proposal thresholds) will be published before launch. One token may equal one vote unless otherwise specified by community-approved charter.</p>
+
+  <h2>10. Technology &amp; Platform</h2>
+  <p>haveadream.xyz is the central hub for $HAD utility. The platform will integrate wallet connectivity for governance, user-generated dream content, meme creation tools, and newsletter/community features. Technical architecture will prioritize security, accessibility, and mobile-friendly design. Solana contract: HAdrC2f52GTnDN15baCBC372QRxsftNL36HUSxveLEKe. Audit status to be published as available.</p>
+
+  <h2>11. Community &amp; Ecosystem</h2>
+  <p>The $HAD movement lives on Telegram announcements (t.me/haveadreamxyz), community chat (t.me/hadunstoppable), Twitter/X (@hadunstoppable), and haveadream.xyz. Community members create art, memes, and real-world acts of unity. HAD.unstoppable provides permanent Web3 identity on Unstoppable Domains.</p>
+
+  <h2>12. Risk Factors</h2>
+  <ul>
+    <li>Cryptocurrency is highly volatile; you may lose your entire investment</li>
+    <li>Meme/utility tokens carry elevated speculative risk</li>
+    <li>Platform features may be delayed or modified by governance</li>
+    <li>Regulatory environments may change and affect token or platform use</li>
+    <li>No yields, returns, or profits are guaranteed</li>
+    <li>Smart contract and platform security risks exist despite best efforts</li>
+  </ul>
+
+  <h2>13. Legal Disclaimer</h2>
+  <p>This whitepaper (v1.1) is for informational purposes only. It does not constitute financial, legal, or investment advice, nor an offer to sell securities. $HAD is a utility/community token. Always conduct your own research (DYOR). References to Dr. Martin Luther King Jr. are tributes; $HAD is not affiliated with or endorsed by the King estate or related organizations.</p>
+
+  <p class="disclaimer">&copy; 2026 $HAD &mdash; Have A Dream &middot; haveadream.xyz &middot; HAD.unstoppable &middot; Launch: January 15, 2027 &middot; To #infinity</p>
+</body>
+</html>

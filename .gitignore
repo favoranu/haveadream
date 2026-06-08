@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+
+# Build output
+app/dist/
+.wrangler/
+
+# Secrets — NEVER commit these
+.env
+.env.*
+.dev.vars
+*.pem
+
+# Local dev data
+subscribers.json
+fix-whitepaper.log
+pdf-log.txt
+handle-out.txt
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log
+
+# Word lock files
+~$*
+
+# Optional: large local media (site copies live in public/images/)
+images/hadunstoppable/
+
+# Tooling cache
+_handle/

@@ -1,0 +1,12 @@
+{
+  "name": "had-token",
+  "version": "1.0.0",
+  "description": "HAD — Have A Dream token landing page with newsletter signup",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["had", "token", "landing-page"],
+  "license": "MIT"
+}
