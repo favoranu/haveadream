@@ -80,8 +80,8 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   }
 
   const resendKey = context.env.RESEND_API_KEY;
-  const fromEmail = context.env.NEWSLETTER_FROM_EMAIL;
-  if (!resendKey || !fromEmail) {
+  const fromEmail = context.env.NEWSLETTER_FROM_EMAIL ?? 'newsletter@haveadream.xyz';
+  if (!resendKey) {
     return jsonResponse(context.request, 503, { error: 'Email verification is not configured yet.' });
   }
 
