@@ -2,7 +2,6 @@ import { useMemo } from 'react';
 import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react';
 import { WalletModalProvider } from '@solana/wallet-adapter-react-ui';
 import { PhantomWalletAdapter } from '@solana/wallet-adapter-phantom';
-import { SolflareWalletAdapter } from '@solana/wallet-adapter-solflare';
 import '@solana/wallet-adapter-react-ui/styles.css';
 import { RPC_PATH } from './config';
 import { Header } from './components/Header';
@@ -18,10 +17,7 @@ function getRpcEndpoint() {
 
 export default function App() {
   const endpoint = useMemo(getRpcEndpoint, []);
-  const wallets = useMemo(
-    () => [new PhantomWalletAdapter(), new SolflareWalletAdapter()],
-    [],
-  );
+  const wallets = useMemo(() => [new PhantomWalletAdapter()], []);
 
   return (
     <ConnectionProvider endpoint={endpoint}>

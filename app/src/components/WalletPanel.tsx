@@ -21,7 +21,7 @@ export function WalletPanel() {
         <>
           <p className="status">Not connected</p>
           <p className="hint">
-            Connect Phantom or Solflare to read your $HAD balance on Solana mainnet.
+            Connect Phantom to read your $HAD balance on Solana mainnet.
           </p>
         </>
       )}
