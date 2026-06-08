@@ -1,17 +1,23 @@
+import { sendVerificationEmail } from '../_shared/email';
+import {
+  createVerifyToken,
+  parseSubscriber,
+  subscriberKey,
+  VERIFY_TTL_MS,
+  verifyKey,
+  type SubscriberRecord,
+} from '../_shared/newsletter';
 import { corsHeaders } from '../_shared/security';
 
 interface Env {
   TURNSTILE_SECRET_KEY?: string;
   NEWSLETTER_KV?: KVNamespace;
+  RESEND_API_KEY?: string;
+  NEWSLETTER_FROM_EMAIL?: string;
 }
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-type SubscriberRecord = {
-  email: string;
-  subscribedAt: string;
-  source: string;
-};
+const VERIFY_BASE = 'https://app.haveadream.xyz/api/verify';
 
 async function verifyTurnstile(secret: string, token: string, ip: string) {
   const body = new URLSearchParams({
@@ -38,10 +44,6 @@ function jsonResponse(request: Request, status: number, payload: unknown) {
       'Content-Type': 'application/json',
     },
   });
-}
-
-function subscriberKey(email: string) {
-  return `subscriber:${email}`;
 }
 
 export const onRequestOptions: PagesFunction<Env> = async (context) => {
@@ -77,10 +79,16 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     return jsonResponse(context.request, 503, { error: 'Newsletter signup is not configured yet.' });
   }
 
-  const ip = context.request.headers.get('CF-Connecting-IP') ?? '';
-  const verified = await verifyTurnstile(secret, turnstileToken, ip);
+  const resendKey = context.env.RESEND_API_KEY;
+  const fromEmail = context.env.NEWSLETTER_FROM_EMAIL;
+  if (!resendKey || !fromEmail) {
+    return jsonResponse(context.request, 503, { error: 'Email verification is not configured yet.' });
+  }
 
-  if (!verified) {
+  const ip = context.request.headers.get('CF-Connecting-IP') ?? '';
+  const turnstileOk = await verifyTurnstile(secret, turnstileToken, ip);
+
+  if (!turnstileOk) {
     return jsonResponse(context.request, 403, { error: 'Verification failed. Please try again.' });
   }
 
@@ -90,23 +98,54 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   }
 
   const key = subscriberKey(email);
-  const existing = await kv.get(key);
-  if (existing) {
-    return jsonResponse(context.request, 409, { error: 'This email is already subscribed.' });
+  const existingRaw = await kv.get(key);
+
+  if (existingRaw) {
+    const existing = parseSubscriber(existingRaw);
+    if (existing.status === 'verified') {
+      return jsonResponse(context.request, 409, { error: 'This email is already subscribed.' });
+    }
   }
 
+  const token = createVerifyToken();
+  const now = new Date();
   const origin = context.request.headers.get('Origin') ?? 'unknown';
-  const record: SubscriberRecord = {
+
+  const pending: SubscriberRecord = {
     email,
-    subscribedAt: new Date().toISOString(),
+    status: 'pending',
+    subscribedAt: now.toISOString(),
     source: origin,
   };
 
-  await kv.put(key, JSON.stringify(record));
+  await kv.put(key, JSON.stringify(pending));
+  await kv.put(
+    verifyKey(token),
+    JSON.stringify({
+      email,
+      token,
+      expiresAt: new Date(now.getTime() + VERIFY_TTL_MS).toISOString(),
+      source: origin,
+    }),
+    { expirationTtl: Math.floor(VERIFY_TTL_MS / 1000) },
+  );
 
-  const countRaw = await kv.get('subscriber:count');
-  const count = Number.parseInt(countRaw ?? '0', 10);
-  await kv.put('subscriber:count', String(Number.isFinite(count) ? count + 1 : 1));
+  try {
+    await sendVerificationEmail({
+      apiKey: resendKey,
+      from: fromEmail,
+      to: email,
+      verifyUrl: `${VERIFY_BASE}?token=${encodeURIComponent(token)}`,
+    });
+  } catch {
+    await kv.delete(verifyKey(token));
+    await kv.delete(key);
+    return jsonResponse(context.request, 502, { error: 'Could not send verification email. Please try again.' });
+  }
 
-  return jsonResponse(context.request, 200, { ok: true, email });
+  return jsonResponse(context.request, 200, {
+    ok: true,
+    pending: true,
+    message: 'Check your inbox and click the verification link to confirm your subscription.',
+  });
 };

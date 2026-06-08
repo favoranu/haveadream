@@ -62,17 +62,21 @@ function clearMessage() {
   messageEl.className = "form-message";
 }
 
-function saveLocally(email) {
-  const stored = JSON.parse(localStorage.getItem("had-subscribers") || "[]");
-  if (stored.includes(email)) {
-    showMessage("This email is already subscribed.", "error");
-    return false;
+function handleNewsletterStatusFromUrl() {
+  const status = new URLSearchParams(window.location.search).get("newsletter");
+  if (!status) return;
+
+  const messages = {
+    verified: "Email verified — you're officially on the $HAD list!",
+    expired: "That verification link expired. Please sign up again.",
+    invalid: "That verification link is invalid. Please sign up again.",
+    error: "We couldn't complete verification. Please try again later.",
+  };
+
+  if (messages[status]) {
+    showMessage(messages[status], status === "verified" ? "success" : "error");
+    history.replaceState(null, "", `${window.location.pathname}#newsletter`);
   }
-  stored.push(email);
-  localStorage.setItem("had-subscribers", JSON.stringify(stored));
-  showMessage("Welcome to the dream! You're on the list.", "success");
-  form.reset();
-  return true;
 }
 
 async function parseJsonSafe(res) {
@@ -127,23 +131,22 @@ form.addEventListener("submit", async (e) => {
     const data = await parseJsonSafe(res);
 
     if (!data) {
-      saveLocally(email);
-      return;
+      throw new Error("Could not reach the signup service. Please try again.");
     }
 
     if (!res.ok) {
       throw new Error(data.error || "Something went wrong. Please try again.");
     }
 
-    showMessage("Welcome to the dream! You're on the list.", "success");
+    showMessage(
+      data.message ||
+        "Check your inbox and click the verification link to confirm your subscription.",
+      "success",
+    );
     form.reset();
     resetTurnstile();
   } catch (err) {
-    if (err.message === "Failed to fetch" || err.name === "TypeError") {
-      saveLocally(email);
-    } else {
-      showMessage(err.message, "error");
-    }
+    showMessage(err.message || "Something went wrong. Please try again.", "error");
   } finally {
     setLoading(false);
   }
@@ -159,6 +162,8 @@ emailInput.addEventListener("input", () => {
 const copyContractBtn = document.getElementById("copy-contract");
 const contractAddressEl = document.getElementById("contract-address");
 const contractCopyMsg = document.getElementById("contract-copy-msg");
+
+handleNewsletterStatusFromUrl();
 
 if (copyContractBtn && contractAddressEl) {
   copyContractBtn.addEventListener("click", async () => {
