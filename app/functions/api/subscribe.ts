@@ -2,9 +2,16 @@ import { corsHeaders } from '../_shared/security';
 
 interface Env {
   TURNSTILE_SECRET_KEY?: string;
+  NEWSLETTER_KV?: KVNamespace;
 }
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+type SubscriberRecord = {
+  email: string;
+  subscribedAt: string;
+  source: string;
+};
 
 async function verifyTurnstile(secret: string, token: string, ip: string) {
   const body = new URLSearchParams({
@@ -31,6 +38,10 @@ function jsonResponse(request: Request, status: number, payload: unknown) {
       'Content-Type': 'application/json',
     },
   });
+}
+
+function subscriberKey(email: string) {
+  return `subscriber:${email}`;
 }
 
 export const onRequestOptions: PagesFunction<Env> = async (context) => {
@@ -72,6 +83,30 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   if (!verified) {
     return jsonResponse(context.request, 403, { error: 'Verification failed. Please try again.' });
   }
+
+  const kv = context.env.NEWSLETTER_KV;
+  if (!kv) {
+    return jsonResponse(context.request, 503, { error: 'Newsletter storage is not configured yet.' });
+  }
+
+  const key = subscriberKey(email);
+  const existing = await kv.get(key);
+  if (existing) {
+    return jsonResponse(context.request, 409, { error: 'This email is already subscribed.' });
+  }
+
+  const origin = context.request.headers.get('Origin') ?? 'unknown';
+  const record: SubscriberRecord = {
+    email,
+    subscribedAt: new Date().toISOString(),
+    source: origin,
+  };
+
+  await kv.put(key, JSON.stringify(record));
+
+  const countRaw = await kv.get('subscriber:count');
+  const count = Number.parseInt(countRaw ?? '0', 10);
+  await kv.put('subscriber:count', String(Number.isFinite(count) ? count + 1 : 1));
 
   return jsonResponse(context.request, 200, { ok: true, email });
 };

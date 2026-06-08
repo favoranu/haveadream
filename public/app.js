@@ -10,6 +10,13 @@ const turnstileSiteKey = document
   ?.content?.trim();
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const SUBSCRIBE_API = (() => {
+  const host = window.location.hostname;
+  if (host === "localhost" || host === "127.0.0.1") {
+    return "/api/subscribe";
+  }
+  return "https://app.haveadream.xyz/api/subscribe";
+})();
 let turnstileWidgetId = null;
 
 function resetTurnstile() {
@@ -108,7 +115,7 @@ form.addEventListener("submit", async (e) => {
   setLoading(true);
 
   try {
-    const res = await fetch("/api/subscribe", {
+    const res = await fetch(SUBSCRIBE_API, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
