@@ -3,9 +3,8 @@ compatibility_date = "2024-09-23"
 compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = "dist"
 
-# Create KV in Cloudflare Dashboard → Workers & Pages → KV → Create namespace "had-newsletter"
-# Then bind it in Pages project Settings → Functions → KV namespace bindings as NEWSLETTER_KV
-# Or paste the namespace id below after creation:
-# [[kv_namespaces]]
-# binding = "NEWSLETTER_KV"
-# id = "YOUR_KV_NAMESPACE_ID"
+# KV namespace: Storage & databases → Workers KV → had-newsletter → copy Namespace ID
+# Paste the id below, commit, push — Pages reads bindings from this file.
+[[kv_namespaces]]
+binding = "NEWSLETTER_KV"
+id = "72057bf882d64095ae961213eb9dd479"
