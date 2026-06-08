@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "deploy": "wrangler pages deploy dist --project-name=havedream",
     "preview": "vite preview",
     "pages:dev": "wrangler pages dev dist --compatibility-date=2024-09-23"
   },
@@ -26,6 +27,6 @@
     "@vitejs/plugin-react": "^4.3.4",
     "typescript": "^5.6.3",
     "vite": "^5.4.11",
-    "wrangler": "^3.94.0"
+    "wrangler": "^4.0.0"
   }
 }

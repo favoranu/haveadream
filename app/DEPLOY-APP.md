@@ -30,6 +30,7 @@ Dashboard → **Workers & Pages** → **Create** → **Pages** → **Connect to 
 | Production branch | `main` |
 | **Root directory** | `app` |
 | **Build command** | `npm run build` |
+| **Deploy command** | `npm run deploy` |
 | **Build output** | `dist` |
 | Framework preset | None (or Vite if offered) |
 
