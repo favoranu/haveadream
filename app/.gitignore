@@ -4,4 +4,10 @@ dist
 .dev.vars
 *.log
 .env
+.env.*
 .env.local
+secrets.local.*
+*.secrets.ps1
+scripts/*.local.ps1
+scripts/*.local.bat
+scripts/secrets.*

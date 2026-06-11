@@ -10,6 +10,11 @@ app/dist/
 .env.*
 .dev.vars
 *.pem
+secrets.local.*
+*.secrets.ps1
+app/scripts/*.local.ps1
+app/scripts/*.local.bat
+app/scripts/secrets.*
 
 # Local dev data
 subscribers.json
