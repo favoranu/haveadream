@@ -1,4 +1,4 @@
-# $HAD — Have A Dream
+﻿# $HAD â€” Have A Dream
 
 Official project for **Have A Dream** ($HAD) on Solana.
 
@@ -17,8 +17,8 @@ Official project for **Have A Dream** ($HAD) on Solana.
 ## Deploy
 
 - **Main site:** upload contents of `public/` to web host root
-  - `index.html` — full landing page (homepage)
-  - `comingsoon.html` — optional splash / teaser page
+  - `index.html` â€” full landing page (homepage)
+  - `comingsoon.html` â€” optional splash / teaser page
 - **App:** see `app/DEPLOY-APP.md` for Cloudflare Pages
 
 ## GitHub
@@ -30,12 +30,7 @@ git push -u origin main
 
 ## Token
 
-Fixed supply 10B. Official mint authority revoked. Legacy mint deprecated — see site for details.
-## Philosophy & Frequency
+Fixed supply 10B. Official mint authority revoked. Legacy mint deprecated â€” see site for details.
 
-Abundant by nature. For the greater good and for humanity.
 
-I AM.
-
-This project is part of a larger journey of creation and service. See the [main profile](https://github.com/favoranu) for the full picture and hidden doors.
 
